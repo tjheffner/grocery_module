@@ -1,0 +1,51 @@
+<?php
+function groceries_menu() {
+    $items = array();
+    $items['grocery'] = array(
+        'title' => 'Grocery List',
+        'page callback' => 'grocery_list',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function grocery_list() {
+    $groceries = array();
+    $groceries['Eggs'] = array(
+        'brand' => "Eggland's Best Eggs",
+        'price' => "2.69",
+        'quantity' => 2,
+        'unit' => 'cartons',
+    );
+
+    $groceries['Bread'] = array(
+        'brand' => "Dave's Killer Bread",
+        'price' => 3.50,
+        'quantity' => 1,
+        'unit' => 'loaf',
+    );
+
+    $groceries['Cheese'] = array(
+        'brand' => 'Tillamook Cheese',
+        'price' => 8.29,
+        'quantity' => 1,
+        'unit' => 'block',
+    );
+
+    $groceries['Beer'] = array(
+        'brand' => 'Deschutes River Ale',
+        'price' => 13.99,
+        'quantity' => 1,
+        'unit' => 'case',
+    );
+
+    $total = 0;
+    $list = null;
+    foreach ($groceries as $grocery) {
+        $list .= '<li>' . $grocery['quantity'] . " " . $grocery['unit'] . " of " . $grocery['brand'] . " for $" . $grocery['price'] . ' each </li>';
+        $total = $total + ($grocery['quantity'] * $grocery['price']);
+    };
+    
+    return $list . 'Total: $' . $total;
+}
